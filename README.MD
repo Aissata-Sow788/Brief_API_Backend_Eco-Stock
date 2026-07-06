@@ -20,6 +20,7 @@ API REST développée avec **Django REST Framework** permettant de gérer des en
 - Django REST Framework
 - SimpleJWT
 - SQLite
+- OpenAPI
 
 ---
 
