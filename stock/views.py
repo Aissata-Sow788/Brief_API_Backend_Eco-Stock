@@ -4,7 +4,7 @@ from .models import Warehouse, Product
 from .serializers import WarehouseSerializers, ProductSerializers
 from rest_framework.decorators import action
 from rest_framework.response import Response
-from rest_framework.permissions import IsAuthenticatedOrReadOnly
+from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAuthenticated
 from rest_framework.permissions import AllowAny
 from rest_framework import status
 
@@ -23,7 +23,7 @@ class WarehouseViewset(viewsets.ModelViewSet):
 
     # Action personnalisée accessible avec :
     # GET /warehouses/<id>/audit/
-    @action(detail=True, methods=['get'], url_path='audit')
+    @action(detail=True, methods=['get'], url_path='audit', permission_classes=[IsAuthenticated])
     def audit(self, request, pk=None):
         # Récupère l'entrepôt correspondant à l'id fourni dans l'URL
         warehouse = self.get_object()

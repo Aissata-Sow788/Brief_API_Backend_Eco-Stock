@@ -22,10 +22,6 @@ class WarehouseSerializers(serializers.ModelSerializer):
                 "Le nom doit avoir au moins 3 caractères"
             )
 
-        # Affichage dans le terminal (utile uniquement pour le débogage)
-        print(f"'{value}'")
-        print(repr(value))
-
         # Expression régulière :
         # - uniquement des lettres
         # - un seul espace entre les mots
@@ -49,6 +45,18 @@ class WarehouseSerializers(serializers.ModelSerializer):
             raise serializers.ValidationError(
                 "La localisation doit avoir au moins 3 caractères"
             )
+        
+        # Expression régulière :
+        # - uniquement des lettres
+        # - un seul espace entre les mots
+        # - pas d'espace au début ni à la fin
+        regex = r'^[A-Za-zÀ-ÿ]+(?: [A-Za-zÀ-ÿ]+)*$'
+
+        # Vérifie que le nom respecte le format
+        if not re.fullmatch(regex, value):
+            raise serializers.ValidationError(
+                "Le nom ne doit contenir que des lettres, avec un seul espace entre les mots, sans espace au début ni à la fin."
+            )
 
         return value
 
@@ -59,15 +67,6 @@ class WarehouseSerializers(serializers.ModelSerializer):
         if value <= 0:
             raise serializers.ValidationError(
                 "La capacité doit être supérieure à 0"
-            )
-
-        # Cette partie est censée vérifier que la capacité est un nombre.
-        # Cependant, comme "value" est déjà un entier (IntegerField),
-        # cette vérification est inutile.
-        regex = r'^[0-9]+$'
-        if re.match(regex, value):
-            raise serializers.ValidationError(
-                "La capacité doit contenir uniquement des chiffres"
             )
 
         # Retourne la valeur validée
@@ -94,9 +93,6 @@ class ProductSerializers(serializers.ModelSerializer):
                 "Le nom doit avoir au moins 3 caractères"
             )
 
-        # Affichage dans le terminal (débogage)
-        print(f"'{value}'")
-        print(repr(value))
 
         # Expression régulière :
         # - uniquement des lettres
