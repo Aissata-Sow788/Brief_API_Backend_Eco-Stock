@@ -98,4 +98,9 @@ class ProductViewset(viewsets.ModelViewSet):
         serializer = self.get_serializer(product)
 
         # Retourne les informations du produit après le transfert
-        return Response(serializer.data, status=status.HTTP_200_OK)
+        return Response(
+            {
+                "message": "Produit déplacé avec succès",
+                "product": serializer.data
+            },
+            status=status.HTTP_200_OK)
