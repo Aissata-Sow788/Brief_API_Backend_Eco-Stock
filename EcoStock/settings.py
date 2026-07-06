@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    "drf_spectacular",
     'rest_framework_simplejwt',
     'stock',
 ]
@@ -119,8 +120,15 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
+SPECTACULAR_SETTINGS = {
+    "TITLE": "Eco-Stock API",
+    "DESCRIPTION": "API de gestion des entrepôts et produits",
+    "VERSION": "1.0.0",
+}
+
 
 REST_FRAMEWORK = {
+    "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework_simplejwt.authentication.JWTAuthentication',
         'rest_framework.authentication.SessionAuthentication',

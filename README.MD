@@ -416,6 +416,94 @@ Les routes GET restent accessibles en lecture seule.
 
 ---
 
+# Documentation OpenAPI
+
+L'API est documentée automatiquement grâce à **drf-spectacular**, qui génère une documentation conforme au standard **OpenAPI 3**.
+
+## Swagger UI
+
+Interface interactive permettant d'explorer et de tester les endpoints de l'API directement depuis le navigateur.
+
+```
+http://127.0.0.1:8000/api/docs/
+```
+
+---
+
+## ReDoc
+
+Documentation générée au format ReDoc, idéale pour la lecture de la documentation.
+
+```
+http://127.0.0.1:8000/api/redoc/
+```
+
+---
+
+## Schéma OpenAPI
+
+Le schéma OpenAPI de l'API est disponible au format YAML.
+
+```
+http://127.0.0.1:8000/api/schema/
+```
+
+---
+
+## Configuration
+
+Le projet utilise **drf-spectacular** pour générer automatiquement la documentation OpenAPI.
+
+Installation :
+
+```bash
+pip install drf-spectacular
+```
+
+Configuration dans `settings.py` :
+
+```python
+INSTALLED_APPS = [
+    ...
+    "drf_spectacular",
+]
+
+REST_FRAMEWORK = {
+    "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
+}
+
+SPECTACULAR_SETTINGS = {
+    "TITLE": "Eco-Stock API",
+    "DESCRIPTION": "API REST de gestion des entrepôts et des produits",
+    "VERSION": "1.0.0",
+}
+```
+
+Configuration des routes dans `urls.py` :
+
+```python
+from django.urls import path
+from drf_spectacular.views import (
+    SpectacularAPIView,
+    SpectacularSwaggerView,
+    SpectacularRedocView,
+)
+
+urlpatterns = [
+    path("api/schema/", SpectacularAPIView.as_view(), name="schema"),
+    path(
+        "api/docs/",
+        SpectacularSwaggerView.as_view(url_name="schema"),
+        name="swagger-ui",
+    ),
+    path(
+        "api/redoc/",
+        SpectacularRedocView.as_view(url_name="schema"),
+        name="redoc",
+    ),
+]
+```
+
 # Aissata Sow
 
 Projet réalisé dans le cadre du développement d'une API REST avec Django REST Framework.
