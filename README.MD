@@ -29,7 +29,7 @@ API REST développée avec **Django REST Framework** permettant de gérer des en
 ## Cloner le projet
 
 ```bash
-git clone https://github.com/votre-compte/eco-stock-api.git
+git clone https://github.com/Aissata-Sow788/Brief_API_Backend_Eco-Stock.git
 ```
 
 ```bash
