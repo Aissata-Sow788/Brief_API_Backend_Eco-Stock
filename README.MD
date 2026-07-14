@@ -505,6 +505,45 @@ urlpatterns = [
 ]
 ```
 
+## Flux global de l'API Eco-Stock
+
+                           Utilisateur
+                                │
+                                ▼
+                 Client (Angular / Postman)
+                                │
+                      Envoi d'une requête HTTP
+                                │
+                                ▼
+                         Django URLs (urls.py)
+                                │
+                                ▼
+                  ViewSets (Warehouse / Product)
+                                │
+                                ▼
+             Vérification des permissions (JWT)
+                                │
+                                ▼
+             Validation des données (Serializers)
+                                │
+                                ▼
+                   Modèles Django (ORM)
+                                │
+                                ▼
+                      Base de données SQLite
+                                │
+                                ▼
+                  Enregistrement / Lecture des données
+                                │
+                                ▼
+                     Réponse JSON de l'API
+                                │
+                                ▼
+                 Client (Angular / Postman)
+                                │
+                                ▼
+              Affichage des données à l'utilisateur
+
 # Aissata Sow
 
 Projet réalisé dans le cadre du développement d'une API REST avec Django REST Framework.
