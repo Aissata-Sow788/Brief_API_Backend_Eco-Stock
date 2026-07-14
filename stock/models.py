@@ -23,7 +23,7 @@ class Product(models.Model):
     nom = models.CharField(max_length=100)
     quantite = models.IntegerField()
     utilisateur = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
-    date_expiration = models.DateTimeField(auto_now_add=True)
+    date_expiration = models.DateField()
     etat = models.CharField(max_length=20, choices=ETAT_CHOICES, default="disponible")
     warehouse = models.ForeignKey(Warehouse, on_delete=models.CASCADE, related_name="products")
 
